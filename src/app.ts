@@ -37,7 +37,7 @@ app.put('/people/:id',(req, res) => {
 
 app.delete('/people/:id',(req, res) => {
     const { id } = req.params;
-    const deleted = People.filter((people) => {
+    const deleted = People.filter((people)=> {
         return people.id !== id;
       });
     
