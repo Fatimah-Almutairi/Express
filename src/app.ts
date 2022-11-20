@@ -1,10 +1,13 @@
 import express, { NextFunction, Request, Response }  from "express";
 import router from "./routers/router";
+import {z} from 'zod'
 // import { Ipeople } from "./generalType";
 // import {IGrade} from "./generalType";
 // import {ITracker} from "./generalType";
 
 const app = express();
+app.use(express.json())
+
 
 app.use('/',router);
 
@@ -12,7 +15,6 @@ app.use('/',router);
 // let People :Ipeople[] = [];
 // let Grade :IGrade[] = [];
 // let Tracker:ITracker[] = [];
-// app.use(express.json())
 
 // // Q1 Part1
 // app.get('/people', (req,res) => {
