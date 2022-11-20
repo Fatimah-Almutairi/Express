@@ -1,14 +1,16 @@
 import express, { NextFunction, Request, Response }  from "express";
 import { Ipeople } from "./generalType";
 import {IGrade} from "./generalType";
+import {ITracker} from "./generalType";
 
 const app = express();
 
 let People :Ipeople[] = [];
 let Grade :IGrade[] = [];
+let Tracker:ITracker[] = [];
 app.use(express.json())
 
-
+// Q1 Part1
 app.get('/people', (req,res) => {
     return res.json(People);
 });
@@ -45,15 +47,7 @@ app.delete('/people/:id',(req, res) => {
     return res.json({ message: 'The Name Deleted'});
 });
 
-// app.delete('/people/:id', (req, res) => {
-//     const { id } = req.params;
-//     const peopleDeleted = People.filter( (people) => {
-//         return people.id !== id;
-//     });
-//     People = peopleDeleted;
-//     return res.json( {message: 'The Name Deleted...'});
-// });
-
+// Q1 Part 2
 app.get('/grade', (req, res) => {
     return res.json(Grade);
 });
@@ -84,8 +78,42 @@ app.delete('/grade/:id', (req, res) => {
         return grade.id !== id;
     });
     Grade = deleted;
-    return res.json({message: 'The Grade Deleted...'})
-})
+    return res.json({message: 'The Grade Deleted...'});
+});
+
+
+// Q2 
+app.get('/tracker', (req,res) => {
+    return res.json(Tracker);
+});
+
+app.post('/tracker', (req,res) =>{
+    const newTracker = req.body as ITracker;
+    Tracker.push(newTracker)
+    return res.json({message: 'Tracker Added'});
+});
+
+app.put('/tracker/:id', (req,res) => {
+    const updateTracker = req.body as ITracker;
+    const { id } = req.params;
+    const updated = Tracker.filter((tracker) => {
+        return tracker.id !== id;
+    });
+    updated.push(updateTracker);
+    Tracker = updated;
+    return res.json({message: "tracker updated.."});
+});
+
+app.delete('/tracker/:id',(req,res) => {
+    const { id } = req.params;
+    const Deleted = Tracker.filter( (tracker) => {
+        return tracker.id !== id;
+    });
+    Tracker = Deleted;
+    return res.json({message: "tracker deleted"});
+});
+
+
 
 
 app.listen(5000);

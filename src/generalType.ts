@@ -12,5 +12,12 @@ export interface Ipeople {
 
 export interface IGrade {
     id: string;
-    grade: number;
+    grade: string;
+}
+
+export interface ITracker {
+    id: string;
+    title: string;
+    description: string;
+    status: boolean;
 }
