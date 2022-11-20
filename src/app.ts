@@ -114,6 +114,16 @@ app.delete('/tracker/:id',(req,res) => {
 });
 
 
+// Search
+
+app.get('/tracker/:title', (req,res) => {
+    let title = req.params.title;
+    let searchVal = Tracker.filter((tracker)=>{
+        return tracker.title === title
+    //   return tracksa.title.toLowerCase() === key;
+    })
+    return res.json(searchVal);
+  });
 
 
 app.listen(5000);
