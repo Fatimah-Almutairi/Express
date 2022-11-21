@@ -9,7 +9,7 @@ import {
 
 const router = express.Router();
 
-const parks: SchemaType[] =[];
+let parks: SchemaType[] =[];
 
 router.get('/', (req, res, next) => {
     return res.status(200).json(parks);

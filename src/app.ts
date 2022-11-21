@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json())
 
 
-app.use('/',router);
+app.use('/park',router);
 
 
 // let People :Ipeople[] = [];
