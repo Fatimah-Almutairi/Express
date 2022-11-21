@@ -1,4 +1,5 @@
 import express from "express";
+import {z} from "zod";
 import { Schema } from "zod";
 import validate from "../valid";
 import {
@@ -22,13 +23,23 @@ router.post('/', validate(schema), (req, res, next) => {
 
 router.put('/:id', validate(schema), (req, res, next) => {
     const updatePark = req.body as SchemaType;
-    const  id  = req.params;
+    const  { id }  = req.params;
     const updated = parks.filter((park) => {
-        return schema.body.id !== id;
-    })
+        return park.id !== id;
+    });
 
-    parks.push(updatePark);
+    updated.push(updatePark);
+    parks = updated;
+    return res.status(201).json({message: "Updated..."})
+});
 
-})
+router.delete('/:id', validate(schema), (req, res, next) => {
+    const { id } = req.params;
+    const deleted = parks.filter( (park) => {
+        return park.id !== id;
+    });
+    parks = deleted;
+    return res.status(201).json({message: "Date Deleted..."});
+});
 
 export default router;
